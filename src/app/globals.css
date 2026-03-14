@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Tailwind Stone (usados: 50, 400, 600, 950) */
+  --color-stone-50: #fafaf9;
+  --color-stone-400: #a8a29e;
+  --color-stone-600: #57534e;
+  --color-stone-950: #0c0a09;
+
+  /* Red */
+  --color-red-700: #b91c1c;
+
+  /* Paleta da marca */
+  --color-brand-cream: #FFF9ED;
+  --color-brand-slate: #97A0A5;
+  --color-brand-olive: #6F6134;
+  --color-brand-brown: #5A483A;
+  --color-brand-warm: #ABA59A;
+
+  /* Font (Montserrat para tudo) */
+  --font-heading: var(--font-montserrat);
+  --font-body: var(--font-montserrat);
+}
+
+:root {
+  --background: #FFF9ED;
+  --foreground: #0c0a09;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:focus-visible {
+  outline: 2px solid #6F6134;
+  outline-offset: 2px;
+}

@@ -1,0 +1,382 @@
+[
+  {
+    "id": "prod_001",
+    "slug": "vestido-linho-off-white",
+    "name": "Vestido Linho Off-White",
+    "description": "Um vestido que carrega a essência do verão em cada fibra. O linho natural confere leveza e personalidade, enquanto o corte midi equilibra feminilidade e sofisticação. Ideal para dias quentes onde o conforto encontra a elegância.",
+    "details": [
+      "100% Linho natural",
+      "Comprimento midi (abaixo do joelho)",
+      "Alças finas ajustáveis",
+      "Fechamento por botões frontais",
+      "Lavar à mão ou máquina delicado",
+      "Produto fabricado no Brasil"
+    ],
+    "price": 59900,
+    "compareAtPrice": null,
+    "images": [
+      "/images/products/vestido-linho-off-white-01.jpg",
+      "/images/products/vestido-linho-off-white-02.jpg",
+      "/images/products/vestido-linho-off-white-03.jpg"
+    ],
+    "sizes": ["PP", "P", "M", "G", "GG"],
+    "colors": [
+      { "name": "Off-White", "hex": "#F5F0E8" },
+      { "name": "Areia", "hex": "#C8B89A" }
+    ],
+    "collectionSlug": "verao-2025",
+    "isNew": true,
+    "isFeatured": true,
+    "inStock": true,
+    "tags": ["vestido", "linho", "verão", "midi"],
+    "createdAt": "2026-01-10T00:00:00.000Z"
+  },
+  {
+    "id": "prod_002",
+    "slug": "calca-wide-leg-preta",
+    "name": "Calça Wide Leg Preta",
+    "description": "A calça que transita do escritório ao fim de semana sem perder o charme. O corte wide leg alonga a silhueta e o tecido fluido garante conforto durante toda a jornada.",
+    "details": [
+      "97% Viscose, 3% Elastano",
+      "Corte wide leg",
+      "Cintura alta",
+      "Forro interno",
+      "Lavar à mão",
+      "Produto fabricado no Brasil"
+    ],
+    "price": 44900,
+    "compareAtPrice": null,
+    "images": [
+      "/images/products/calca-wide-leg-preta-01.jpg",
+      "/images/products/calca-wide-leg-preta-02.jpg"
+    ],
+    "sizes": ["34", "36", "38", "40", "42", "44"],
+    "colors": [
+      { "name": "Preto", "hex": "#111111" },
+      { "name": "Marinho", "hex": "#1a2744" }
+    ],
+    "collectionSlug": "essenciais",
+    "isNew": false,
+    "isFeatured": true,
+    "inStock": true,
+    "tags": ["calça", "wide leg", "essencial", "trabalho"],
+    "createdAt": "2025-11-20T00:00:00.000Z"
+  },
+  {
+    "id": "prod_003",
+    "slug": "blusa-seda-marfim",
+    "name": "Blusa Seda Marfim",
+    "description": "O toque da seda é incomparável. Esta blusa de decote V suave é a peça que eleva qualquer combinação — do jeans ao smoking.",
+    "details": [
+      "100% Seda natural",
+      "Decote V",
+      "Manga longa",
+      "Acabamento em barra dobrada",
+      "Lavar à mão somente",
+      "Produto fabricado no Brasil"
+    ],
+    "price": 78900,
+    "compareAtPrice": 89900,
+    "images": [
+      "/images/products/blusa-seda-marfim-01.jpg",
+      "/images/products/blusa-seda-marfim-02.jpg"
+    ],
+    "sizes": ["PP", "P", "M", "G"],
+    "colors": [
+      { "name": "Marfim", "hex": "#FFFFF0" },
+      { "name": "Nude", "hex": "#E8C9A0" },
+      { "name": "Preto", "hex": "#111111" }
+    ],
+    "collectionSlug": "essenciais",
+    "isNew": false,
+    "isFeatured": false,
+    "inStock": true,
+    "tags": ["blusa", "seda", "essencial", "clássico"],
+    "createdAt": "2025-10-05T00:00:00.000Z"
+  },
+  {
+    "id": "prod_004",
+    "slug": "vestido-noite-verde",
+    "name": "Vestido Noite Verde Esmeralda",
+    "description": "Para noites que merecem ser lembradas. O verde esmeralda em crepe de seda cria um jogo de luz único, enquanto o corte drapeado valoriza a silhueta com elegância.",
+    "details": [
+      "100% Crepe de Seda",
+      "Corte drapeado",
+      "Abertura lateral na perna",
+      "Comprimento longo",
+      "Lavar à mão",
+      "Produto fabricado no Brasil"
+    ],
+    "price": 129900,
+    "compareAtPrice": null,
+    "images": [
+      "/images/products/vestido-noite-verde-01.jpg",
+      "/images/products/vestido-noite-verde-02.jpg",
+      "/images/products/vestido-noite-verde-03.jpg"
+    ],
+    "sizes": ["PP", "P", "M", "G", "GG"],
+    "colors": [
+      { "name": "Verde Esmeralda", "hex": "#046307" },
+      { "name": "Vinho", "hex": "#722F37" }
+    ],
+    "collectionSlug": "noite",
+    "isNew": true,
+    "isFeatured": true,
+    "inStock": true,
+    "tags": ["vestido", "festa", "noite", "longo"],
+    "createdAt": "2026-02-01T00:00:00.000Z"
+  },
+  {
+    "id": "prod_005",
+    "slug": "blazer-estruturado-creme",
+    "name": "Blazer Estruturado Creme",
+    "description": "O blazer redefinido. Estrutura que não engessa, corte que não oprimi. Em crepe de lã italiano, este blazer é o aliado definitivo para dias que exigem presença.",
+    "details": [
+      "70% Lã italiana, 30% Poliéster",
+      "Forro 100% seda",
+      "Botões forrados",
+      "Ombros estruturados",
+      "Limpeza a seco recomendada",
+      "Produto fabricado no Brasil"
+    ],
+    "price": 98900,
+    "compareAtPrice": null,
+    "images": [
+      "/images/products/blazer-estruturado-creme-01.jpg",
+      "/images/products/blazer-estruturado-creme-02.jpg"
+    ],
+    "sizes": ["PP", "P", "M", "G", "GG"],
+    "colors": [
+      { "name": "Creme", "hex": "#F5E6D3" },
+      { "name": "Caramelo", "hex": "#C68642" },
+      { "name": "Preto", "hex": "#111111" }
+    ],
+    "collectionSlug": "studio",
+    "isNew": true,
+    "isFeatured": true,
+    "inStock": true,
+    "tags": ["blazer", "trabalho", "studio", "formal"],
+    "createdAt": "2026-02-15T00:00:00.000Z"
+  },
+  {
+    "id": "prod_006",
+    "slug": "conjunto-linho-natural",
+    "name": "Conjunto Linho Natural",
+    "description": "Calça e blusa em linho puro que se complementam sem se repetirem. Use junto ou separado — a versatilidade é a peça mais valiosa do guarda-roupa.",
+    "details": [
+      "100% Linho natural",
+      "Calça: corte reto, cós elástico",
+      "Blusa: decote redondo, manga 3/4",
+      "Lavar à mão",
+      "Vendido como conjunto",
+      "Produto fabricado no Brasil"
+    ],
+    "price": 84900,
+    "compareAtPrice": null,
+    "images": [
+      "/images/products/conjunto-linho-natural-01.jpg",
+      "/images/products/conjunto-linho-natural-02.jpg"
+    ],
+    "sizes": ["PP", "P", "M", "G", "GG"],
+    "colors": [
+      { "name": "Natural", "hex": "#E8DCC8" },
+      { "name": "Branco", "hex": "#FFFFFF" }
+    ],
+    "collectionSlug": "verao-2025",
+    "isNew": true,
+    "isFeatured": false,
+    "inStock": true,
+    "tags": ["conjunto", "linho", "verão", "casual"],
+    "createdAt": "2026-01-20T00:00:00.000Z"
+  },
+  {
+    "id": "prod_007",
+    "slug": "saia-midi-plissada",
+    "name": "Saia Midi Plissada",
+    "description": "O plissado que dança. Em tecido acetinado, esta saia midi transforma cada passo em movimento. Combine com a Blusa Seda Marfim para um look completo.",
+    "details": [
+      "100% Poliéster acetinado",
+      "Comprimento midi",
+      "Cintura elástica",
+      "Plissado permanente",
+      "Lavar à máquina delicado",
+      "Produto fabricado no Brasil"
+    ],
+    "price": 49900,
+    "compareAtPrice": null,
+    "images": [
+      "/images/products/saia-midi-plissada-01.jpg",
+      "/images/products/saia-midi-plissada-02.jpg"
+    ],
+    "sizes": ["PP", "P", "M", "G", "GG"],
+    "colors": [
+      { "name": "Prata", "hex": "#C0C0C0" },
+      { "name": "Dourado", "hex": "#C8A882" },
+      { "name": "Preto", "hex": "#111111" }
+    ],
+    "collectionSlug": "noite",
+    "isNew": false,
+    "isFeatured": false,
+    "inStock": true,
+    "tags": ["saia", "plissada", "noite", "midi"],
+    "createdAt": "2025-12-01T00:00:00.000Z"
+  },
+  {
+    "id": "prod_008",
+    "slug": "camisa-algodao-oversized",
+    "name": "Camisa Algodão Oversized",
+    "description": "O relaxed fit que nunca sai de moda. Em algodão egípcio de alta gramatura, esta camisa é conforto com personalidade — use aberta como sobreposição ou fechada com calça de alfaiataria.",
+    "details": [
+      "100% Algodão egípcio",
+      "Corte oversized",
+      "Manga comprida com punhos",
+      "Botões de madrepérola",
+      "Lavar à máquina",
+      "Produto fabricado no Brasil"
+    ],
+    "price": 38900,
+    "compareAtPrice": null,
+    "images": [
+      "/images/products/camisa-algodao-oversized-01.jpg",
+      "/images/products/camisa-algodao-oversized-02.jpg"
+    ],
+    "sizes": ["PP", "P", "M", "G", "GG"],
+    "colors": [
+      { "name": "Branco", "hex": "#FFFFFF" },
+      { "name": "Azul Claro", "hex": "#B8D4E8" },
+      { "name": "Listrado", "hex": "#F0F0F0" }
+    ],
+    "collectionSlug": "essenciais",
+    "isNew": false,
+    "isFeatured": false,
+    "inStock": true,
+    "tags": ["camisa", "algodão", "essencial", "casual"],
+    "createdAt": "2025-09-15T00:00:00.000Z"
+  },
+  {
+    "id": "prod_009",
+    "slug": "macacao-linho-terracota",
+    "name": "Macacão Linho Terracota",
+    "description": "Um só gesto e o look está pronto. O macacão em linho terracota combina praticidade com sofisticação — a peça que simplifica manhãs sem abrir mão do estilo.",
+    "details": [
+      "100% Linho lavado",
+      "Corte reto",
+      "Cinto de tecido incluso",
+      "Bolsos laterais",
+      "Lavar à mão",
+      "Produto fabricado no Brasil"
+    ],
+    "price": 72900,
+    "compareAtPrice": null,
+    "images": [
+      "/images/products/macacao-linho-terracota-01.jpg",
+      "/images/products/macacao-linho-terracota-02.jpg"
+    ],
+    "sizes": ["PP", "P", "M", "G", "GG"],
+    "colors": [
+      { "name": "Terracota", "hex": "#CC4E2A" },
+      { "name": "Mostarda", "hex": "#C8A030" }
+    ],
+    "collectionSlug": "verao-2025",
+    "isNew": true,
+    "isFeatured": false,
+    "inStock": true,
+    "tags": ["macacão", "linho", "verão", "casual"],
+    "createdAt": "2026-01-25T00:00:00.000Z"
+  },
+  {
+    "id": "prod_010",
+    "slug": "vestido-camisao-branco",
+    "name": "Vestido Camisão Branco",
+    "description": "A liberdade em forma de vestido. Inspirado nas camisas masculinas, este camisão-vestido de algodão premium é a definição de elegância casual.",
+    "details": [
+      "100% Algodão premium",
+      "Comprimento acima do joelho",
+      "Abotoamento frontal",
+      "Bolsos laterais",
+      "Lavar à máquina",
+      "Produto fabricado no Brasil"
+    ],
+    "price": 42900,
+    "compareAtPrice": null,
+    "images": [
+      "/images/products/vestido-camisao-branco-01.jpg",
+      "/images/products/vestido-camisao-branco-02.jpg"
+    ],
+    "sizes": ["PP", "P", "M", "G", "GG"],
+    "colors": [
+      { "name": "Branco", "hex": "#FFFFFF" },
+      { "name": "Azul Claro", "hex": "#B8D4E8" }
+    ],
+    "collectionSlug": "essenciais",
+    "isNew": false,
+    "isFeatured": false,
+    "inStock": true,
+    "tags": ["vestido", "algodão", "casual", "essencial"],
+    "createdAt": "2025-11-01T00:00:00.000Z"
+  },
+  {
+    "id": "prod_011",
+    "slug": "top-bandeau-cetim",
+    "name": "Top Bandeau Cetim",
+    "description": "Minimalismo no seu estado mais sedutor. Em cetim italiano, este top bandeau é a peça de transição — use com calça de alfaiataria para o trabalho ou saia midi para a noite.",
+    "details": [
+      "100% Cetim de seda italiano",
+      "Boning interno para sustentação",
+      "Fechamento por gancho nas costas",
+      "Alças removíveis",
+      "Lavar à mão",
+      "Produto fabricado no Brasil"
+    ],
+    "price": 32900,
+    "compareAtPrice": null,
+    "images": [
+      "/images/products/top-bandeau-cetim-01.jpg",
+      "/images/products/top-bandeau-cetim-02.jpg"
+    ],
+    "sizes": ["PP", "P", "M", "G"],
+    "colors": [
+      { "name": "Preto", "hex": "#111111" },
+      { "name": "Bege", "hex": "#F5DEB3" },
+      { "name": "Verde Musgo", "hex": "#4A5240" }
+    ],
+    "collectionSlug": "noite",
+    "isNew": true,
+    "isFeatured": false,
+    "inStock": true,
+    "tags": ["top", "cetim", "noite", "minimalismo"],
+    "createdAt": "2026-02-10T00:00:00.000Z"
+  },
+  {
+    "id": "prod_012",
+    "slug": "calca-alfaiataria-cinza",
+    "name": "Calça Alfaiataria Cinza",
+    "description": "A calça que todo guarda-roupa precisa. Corte reto de alfaiataria em crepe premium cinza — a base perfeita para construir qualquer look com autoridade.",
+    "details": [
+      "60% Lã, 40% Viscose",
+      "Corte reto de alfaiataria",
+      "Cintura alta",
+      "Bolsos funcionais",
+      "Limpeza a seco recomendada",
+      "Produto fabricado no Brasil"
+    ],
+    "price": 54900,
+    "compareAtPrice": null,
+    "images": [
+      "/images/products/calca-alfaiataria-cinza-01.jpg",
+      "/images/products/calca-alfaiataria-cinza-02.jpg"
+    ],
+    "sizes": ["34", "36", "38", "40", "42", "44"],
+    "colors": [
+      { "name": "Cinza", "hex": "#808080" },
+      { "name": "Caramelo", "hex": "#C68642" },
+      { "name": "Preto", "hex": "#111111" }
+    ],
+    "collectionSlug": "studio",
+    "isNew": false,
+    "isFeatured": true,
+    "inStock": true,
+    "tags": ["calça", "alfaiataria", "studio", "trabalho"],
+    "createdAt": "2025-12-15T00:00:00.000Z"
+  }
+]

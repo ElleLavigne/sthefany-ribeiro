@@ -1,0 +1,34 @@
+[
+  {
+    "id": "col_001",
+    "slug": "essenciais",
+    "name": "Essenciais",
+    "description": "Peças atemporais que formam a base de qualquer guarda-roupa. Elegância sem esforço para o dia a dia.",
+    "coverImage": "/images/collections/essenciais.jpg",
+    "order": 1
+  },
+  {
+    "id": "col_002",
+    "slug": "verao-2025",
+    "name": "Verão 2025",
+    "description": "Leveza e movimento para os dias mais quentes. Tecidos naturais em tons que evocam luz e areia.",
+    "coverImage": "/images/collections/verao-2025.jpg",
+    "order": 2
+  },
+  {
+    "id": "col_003",
+    "slug": "noite",
+    "name": "Noite",
+    "description": "Para os momentos que pedem mais. Cortes precisos e tecidos nobres que fazem a diferença.",
+    "coverImage": "/images/collections/noite.jpg",
+    "order": 3
+  },
+  {
+    "id": "col_004",
+    "slug": "studio",
+    "name": "Studio",
+    "description": "Do trabalho ao jantar. Peças versáteis com acabamento impecável para mulheres em movimento.",
+    "coverImage": "/images/collections/studio.jpg",
+    "order": 4
+  }
+]
