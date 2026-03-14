@@ -15,6 +15,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(brand.url),
   title: {
     template: brand.seo.titleTemplate,
     default: brand.seo.defaultTitle,
