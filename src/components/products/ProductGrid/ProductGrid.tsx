@@ -1,5 +1,6 @@
 import type { Product } from "@/types/product";
 import { ProductCard } from "../ProductCard/ProductCard";
+import { RevealOnScroll } from "@/components/ui/RevealOnScroll/RevealOnScroll";
 
 interface ProductGridProps {
   products: Product[];
@@ -23,8 +24,10 @@ export function ProductGrid({ products, columns = 4 }: ProductGridProps) {
 
   return (
     <div className={`grid ${gridCols[columns]} gap-x-3 gap-y-8 md:gap-x-6 md:gap-y-14`}>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+      {products.map((product, index) => (
+        <RevealOnScroll key={product.id} delay={(index % (columns === 3 ? 3 : 4)) * 100}>
+          <ProductCard product={product} />
+        </RevealOnScroll>
       ))}
     </div>
   );
