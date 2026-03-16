@@ -29,12 +29,12 @@ const cards: PromoCard[] = [
 export function PromoCards() {
   return (
     <section aria-label="Promocoes em destaque" className="py-2 px-2 md:px-8 lg:px-16">
-      <div className="max-w-[1400px] mx-auto flex gap-2 justify-center">
+      <div className="max-w-362 mx-auto flex flex-col md:flex-row gap-2 justify-center">
         {cards.map((card) => (
           <Link
             key={card.title}
             href={card.href}
-            className="group relative w-179 h-227.25 overflow-hidden bg-brand-warm shrink-0"
+            className="group relative w-full md:w-179 aspect-716/909 overflow-hidden bg-brand-warm"
             aria-label={card.title}
           >
             {/* Imagem de fundo */}

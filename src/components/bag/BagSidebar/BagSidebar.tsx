@@ -52,7 +52,7 @@ export function BagSidebar() {
         aria-modal="true"
         aria-label="Sacola de compras"
         className={cn(
-          "fixed right-0 top-0 h-full w-full max-w-md bg-white z-50",
+          "fixed right-0 top-0 h-dvh w-full max-w-md bg-white z-50",
           "flex flex-col shadow-2xl",
           "transform transition-transform duration-300 ease-out",
           isOpen ? "translate-x-0" : "translate-x-full"
@@ -100,7 +100,7 @@ export function BagSidebar() {
 
         {/* Resumo */}
         {items.length > 0 && (
-          <div className="px-6 pb-8">
+          <div className="px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
             <BagSummary />
           </div>
         )}

@@ -62,7 +62,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-brand-cream/60 hover:text-brand-cream transition-colors"
-                  aria-label="Instagram da Stheany Ribeiro"
+                  aria-label="Instagram da Sthefany Ribeiro"
                 >
                   Instagram
                 </a>

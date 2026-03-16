@@ -22,7 +22,7 @@ export default function SobreNosPage() {
             Sobre nos
           </h1>
           <p className="text-sm text-stone-600 leading-relaxed">
-            A Stheany Ribeiro nasceu da vontade de criar roupas que respeitam
+            A Sthefany Ribeiro nasceu da vontade de criar roupas que respeitam
             o tempo de cada mulher — pecas duradouras, confortaveis e cheias
             de personalidade. Acreditamos que a moda deve ser um instrumento
             de autoexpressao, nao uma obrigacao.
@@ -34,7 +34,7 @@ export default function SobreNosPage() {
           <div className="relative aspect-3/4 bg-brand-warm overflow-hidden">
             <Image
               src="/images/sobre/sobre-nos.jpg"
-              alt="Stheany Ribeiro — atelier"
+              alt="Sthefany Ribeiro — atelier"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"

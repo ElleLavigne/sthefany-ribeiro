@@ -1,10 +1,10 @@
 /**
- * Configuração central da marca Stheany Ribeiro.
+ * Configuração central da marca Sthefany Ribeiro.
  * Fonte única de verdade para identidade visual, SEO e dados de contato.
  * Altere aqui — todos os componentes herdam automaticamente.
  */
 export const brand = {
-  name: "Stheany Ribeiro",
+  name: "Sthefany Ribeiro",
   tagline: "",
   description:
     "Moda contemporânea com design elegante e minimalista. Peças criadas para mulheres que valorizam estilo e autenticidade.",
@@ -56,13 +56,13 @@ export const brand = {
   },
 
   seo: {
-    titleTemplate: "%s | Stheany Ribeiro",
-    defaultTitle: "Stheany Ribeiro — Moda Contemporânea",
+    titleTemplate: "%s | Sthefany Ribeiro",
+    defaultTitle: "Sthefany Ribeiro — Moda Contemporânea",
     keywords: [
       "moda feminina",
       "roupas elegantes",
       "moda contemporânea",
-      "Stheany Ribeiro",
+      "Sthefany Ribeiro",
       "roupas minimalistas",
     ],
   },

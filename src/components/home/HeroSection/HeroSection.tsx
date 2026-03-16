@@ -11,7 +11,7 @@ export function HeroSection() {
       <div className="absolute inset-0">
         <Image
           src="/images/hero/hero-principal.jpg"
-          alt="Colecao Stheany Ribeiro"
+          alt="Colecao Sthefany Ribeiro"
           fill
           className="object-cover object-top"
           priority

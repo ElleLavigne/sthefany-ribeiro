@@ -14,7 +14,7 @@ function renderWithProvider() {
 describe("Header", () => {
   it("should render the brand name", () => {
     renderWithProvider();
-    expect(screen.getByText("Stheany Ribeiro")).toBeInTheDocument();
+    expect(screen.getByText("Sthefany Ribeiro")).toBeInTheDocument();
   });
 
   it("should render navigation links", () => {

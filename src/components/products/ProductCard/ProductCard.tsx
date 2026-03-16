@@ -39,9 +39,9 @@ export function ProductCard({ product }: ProductCardProps) {
   }
 
   return (
-    <div className="group flex flex-col w-96 shrink-0">
+    <div className="group flex flex-col w-full">
       {/* Imagem */}
-      <div className="relative h-136.5 overflow-hidden bg-stone-50 mb-3">
+      <div className="relative aspect-384/546 overflow-hidden bg-stone-50 mb-3">
         <Link
           href={`/products/${product.slug}`}
           aria-label={`Ver detalhes de ${product.name}`}
