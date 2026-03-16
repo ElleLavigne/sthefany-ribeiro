@@ -1,28 +1,27 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getLowestPriceByTag } from "@/lib/data/products";
+import { formatPrice } from "@/lib/utils/formatPrice";
 
-interface PromoCard {
+interface PromoCardData {
   title: string;
-  subtitle: string;
+  tag: string;
   href: string;
   image: string;
-  align?: "left" | "right";
 }
 
-const cards: PromoCard[] = [
+const cards: PromoCardData[] = [
   {
     title: "Vestidos",
-    subtitle: "a partir de R$ 90,00",
+    tag: "vestido",
     href: "/collections/verao-2025",
     image: "/images/promo/promo-vestidos.jpg",
-    align: "left",
   },
   {
     title: "Conjuntos",
-    subtitle: "a partir de R$ 90,00",
+    tag: "conjunto",
     href: "/collections/essenciais",
     image: "/images/promo/promo-conjuntos.jpg",
-    align: "right",
   },
 ];
 
@@ -30,23 +29,39 @@ export function PromoCards() {
   return (
     <section aria-label="Promocoes em destaque" className="py-2 px-2 md:px-8 lg:px-16">
       <div className="max-w-362 mx-auto flex flex-col md:flex-row gap-2 justify-center">
-        {cards.map((card) => (
-          <Link
-            key={card.title}
-            href={card.href}
-            className="group relative w-full md:w-179 aspect-716/909 overflow-hidden bg-brand-warm"
-            aria-label={card.title}
-          >
-            {/* Imagem de fundo */}
-            <Image
-              src={card.image}
-              alt={card.title}
-              fill
-              className="object-cover object-center"
-              sizes="716px"
-            />
-          </Link>
-        ))}
+        {cards.map((card) => {
+          const lowestPrice = getLowestPriceByTag(card.tag);
+
+          return (
+            <Link
+              key={card.title}
+              href={card.href}
+              className="group relative w-full md:w-179 aspect-716/909 overflow-hidden bg-brand-warm"
+              aria-label={card.title}
+            >
+              {/* Imagem de fundo */}
+              <Image
+                src={card.image}
+                alt={card.title}
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 768px) 100vw, 716px"
+              />
+
+              {/* Texto sobre a imagem */}
+              <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/60 to-transparent px-6 pb-8 pt-20">
+                <h3 className="text-white text-xl md:text-2xl font-semibold tracking-widest uppercase">
+                  {card.title}
+                </h3>
+                {lowestPrice !== null && (
+                  <p className="text-white/80 text-sm mt-1">
+                    a partir de {formatPrice(lowestPrice)}
+                  </p>
+                )}
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );

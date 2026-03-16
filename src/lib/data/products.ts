@@ -27,6 +27,12 @@ export function getProductSlugs(): string[] {
   return products.map((p) => p.slug);
 }
 
+export function getLowestPriceByTag(tag: string): number | null {
+  const matched = products.filter((p) => p.inStock && p.tags.includes(tag));
+  if (matched.length === 0) return null;
+  return Math.min(...matched.map((p) => p.price));
+}
+
 export function getRelatedProducts(product: Product, limit = 4): Product[] {
   return products
     .filter(
