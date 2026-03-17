@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import { useBag } from "@/hooks/useBag";
 import { brand } from "@config/brand";
@@ -24,7 +25,7 @@ function buildWhatsAppMessage(
 }
 
 export function BagSummary() {
-  const { items, totalPrice } = useBag();
+  const { items, totalPrice, closeBag } = useBag();
   const shippingThreshold = brand.shipping.freeAbove;
   const freeShipping = totalPrice >= shippingThreshold;
   const remaining = shippingThreshold - totalPrice;
@@ -74,15 +75,76 @@ export function BagSummary() {
         </button>
       )}
 
+      <Link
+        href="/collections"
+        onClick={closeBag}
+        className="flex items-center justify-center w-full border border-stone-950 text-stone-950 py-3 text-[10px] tracking-widest uppercase font-medium hover:bg-stone-950 hover:text-white transition-colors"
+      >
+        Continuar Comprando
+      </Link>
+
       {/* Pagamento */}
-      <div className="pt-4 border-t border-brand-warm/30 space-y-2">
-        <p className="text-[10px] tracking-widest uppercase text-stone-600 font-semibold">
+      <div className="pt-4 border-t border-brand-warm/30 space-y-3">
+        <p className="text-[10px] tracking-widest uppercase text-stone-950 font-semibold">
           Formas de pagamento
         </p>
-        <p className="text-[10px] text-stone-400 leading-relaxed">
-          Todos os cartões de crédito e débito (exceto Credshop), Pix e dinheiro (espécie).
+        <div className="flex flex-wrap gap-3">
+          <PaymentMethod icon={<CreditCardIcon />} label="Crédito" />
+          <PaymentMethod icon={<DebitCardIcon />} label="Débito" />
+          <PaymentMethod icon={<PixIcon />} label="Pix" />
+          <PaymentMethod icon={<CashIcon />} label="Espécie" />
+        </div>
+        <p className="text-[10px] text-stone-600 leading-relaxed">
+          Aceitamos todos os cartões, exceto Credshop.
         </p>
       </div>
     </div>
+  );
+}
+
+function PaymentMethod({ icon, label }: { icon: React.ReactNode; label: string }) {
+  return (
+    <div className="flex items-center gap-1.5 text-stone-950">
+      {icon}
+      <span className="text-[10px] font-medium">{label}</span>
+    </div>
+  );
+}
+
+function CreditCardIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+      <line x1="1" y1="10" x2="23" y2="10" />
+    </svg>
+  );
+}
+
+function DebitCardIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+      <line x1="1" y1="10" x2="23" y2="10" />
+      <circle cx="18" cy="16" r="1.5" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function PixIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M13.17 10.83l-2.34-2.34a2.5 2.5 0 00-3.54 0L4.46 11.32a2.5 2.5 0 000 3.54l2.83 2.83a2.5 2.5 0 003.54 0l2.34-2.34" />
+      <path d="M10.83 13.17l2.34 2.34a2.5 2.5 0 003.54 0l2.83-2.83a2.5 2.5 0 000-3.54l-2.83-2.83a2.5 2.5 0 00-3.54 0l-2.34 2.34" />
+    </svg>
+  );
+}
+
+function CashIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="6" width="20" height="12" rx="2" />
+      <circle cx="12" cy="12" r="3" />
+      <path d="M2 10h1M21 10h1M2 14h1M21 14h1" />
+    </svg>
   );
 }
