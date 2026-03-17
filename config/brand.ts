@@ -10,7 +10,7 @@ export const brand = {
     "Moda contemporânea com design elegante e minimalista. Peças criadas para mulheres que valorizam estilo e autenticidade.",
 
   contact: {
-    email: "contato@stheanyribeiro.com",
+    email: "Sthefanyribeiroofc@gmail.com",
     whatsapp: "+558698345521",
     address: {
       city: "Brasil",
@@ -18,7 +18,7 @@ export const brand = {
   },
 
   social: {
-    instagram: "https://instagram.com/stheanyribeiro",
+    instagram: "https://www.instagram.com/sthefanyribeiroofc?igsh=MTA2M2R6NGlsNDQwYQ%3D%3D&utm_source=qr",
     tiktok: "",
     pinterest: "",
   },
