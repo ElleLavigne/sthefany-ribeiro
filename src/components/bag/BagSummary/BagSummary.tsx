@@ -94,7 +94,7 @@ export function BagSummary() {
           <PaymentMethod icon={<PixIcon />} label="Pix" />
           <PaymentMethod icon={<CashIcon />} label="Espécie" />
         </div>
-        <p className="text-[10px] text-stone-600 leading-relaxed">
+        <p className="text-[10px] text-stone-950 leading-relaxed">
           Aceitamos todos os cartões, exceto Credshop.
         </p>
       </div>
