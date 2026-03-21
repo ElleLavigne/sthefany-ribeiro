@@ -8,7 +8,7 @@ export function Footer() {
   return (
     <footer className="bg-brand-brown border-t border-brand-warm/20 mt-auto">
       <Container className="py-14">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {/* Marca */}
           <div>
             <p className="text-sm font-semibold tracking-widest uppercase mb-3 text-brand-cream">
@@ -19,17 +19,38 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Links */}
+          {/* Navegação */}
           <div>
             <p className="text-[10px] tracking-widest uppercase text-brand-cream/40 mb-4 font-semibold">
-              Navegacao
+              Navegação
             </p>
             <nav className="flex flex-col gap-3">
               {[
                 { href: "/", label: "Home" },
-                { href: "/collections", label: "Catalogo" },
-                { href: "/sobre-nos", label: "Sobre Nos" },
+                { href: "/collections", label: "Catálogo" },
+                { href: "/sobre-nos", label: "Sobre Nós" },
                 { href: "/bag", label: "Sacola" },
+              ].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-xs text-brand-cream/60 hover:text-brand-cream transition-colors tracking-wide"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Políticas */}
+          <div>
+            <p className="text-[10px] tracking-widest uppercase text-brand-cream/40 mb-4 font-semibold">
+              Políticas
+            </p>
+            <nav className="flex flex-col gap-3">
+              {[
+                { href: "/politica-de-trocas", label: "Política de Trocas" },
+                { href: "/politica-de-privacidade", label: "Política de Privacidade" },
               ].map((link) => (
                 <Link
                   key={link.href}
