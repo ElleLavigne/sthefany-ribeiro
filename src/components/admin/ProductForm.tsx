@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@config/firebase";
 import type { Product, ProductColor } from "@/types/product";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 
 interface ProductFormProps {
   initialData?: Product;
@@ -38,7 +39,7 @@ export function ProductForm({ initialData, isEditing }: ProductFormProps) {
   const [isFeatured, setIsFeatured] = useState(initialData?.isFeatured ?? false);
   const [inStock, setInStock] = useState(initialData?.inStock ?? true);
   const [tags, setTags] = useState(initialData?.tags.join(", ") || "");
-  const [images, setImages] = useState(initialData?.images.join("\n") || "");
+  const [imageUrls, setImageUrls] = useState<string[]>(initialData?.images || []);
   const [colors, setColors] = useState<ProductColor[]>(initialData?.colors || [{ name: "", hex: "#000000" }]);
 
   function addColor() {
@@ -75,7 +76,7 @@ export function ProductForm({ initialData, isEditing }: ProductFormProps) {
         details: details.split("\n").filter((d) => d.trim()),
         price: priceInCents,
         compareAtPrice: compareInCents,
-        images: images.split("\n").filter((i) => i.trim()),
+        images: imageUrls,
         sizes: sizes.split(",").map((s) => s.trim()).filter(Boolean),
         colors: colors.filter((c) => c.name.trim()),
         collectionSlug,
@@ -231,36 +232,12 @@ export function ProductForm({ initialData, isEditing }: ProductFormProps) {
 
       {/* Imagens */}
       <div>
-        <label className={labelClass}>URLs das imagens (uma por linha)</label>
-        <textarea
-          rows={3}
-          value={images}
-          onChange={(e) => setImages(e.target.value)}
-          className={inputClass}
-          placeholder={"/images/products/produto-01.jpg\n/images/products/produto-02.jpg"}
+        <label className={labelClass}>Imagens do produto</label>
+        <ImageUpload
+          images={imageUrls}
+          onChange={setImageUrls}
+          folder="products"
         />
-        {images.trim() && (
-          <div className="flex gap-3 mt-3 flex-wrap">
-            {images
-              .split("\n")
-              .filter((url) => url.trim())
-              .map((url, i) => (
-                <div
-                  key={i}
-                  className="w-20 h-20 rounded-lg overflow-hidden border border-stone-200 bg-stone-100"
-                >
-                  <img
-                    src={url.trim()}
-                    alt={`Preview ${i + 1}`}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = "none";
-                    }}
-                  />
-                </div>
-              ))}
-          </div>
-        )}
       </div>
 
       {/* Tags */}

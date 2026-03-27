@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@config/firebase";
 import type { Collection } from "@/types/collection";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 
 interface CollectionFormProps {
   initialData?: Collection;
@@ -27,7 +28,9 @@ export function CollectionForm({ initialData, isEditing }: CollectionFormProps) 
 
   const [name, setName] = useState(initialData?.name || "");
   const [description, setDescription] = useState(initialData?.description || "");
-  const [coverImage, setCoverImage] = useState(initialData?.coverImage || "");
+  const [coverImages, setCoverImages] = useState<string[]>(
+    initialData?.coverImage ? [initialData.coverImage] : []
+  );
   const [order, setOrder] = useState(initialData?.order?.toString() || "");
 
   async function handleSubmit(e: React.FormEvent) {
@@ -43,7 +46,7 @@ export function CollectionForm({ initialData, isEditing }: CollectionFormProps) 
         slug,
         name,
         description,
-        coverImage,
+        coverImage: coverImages[0] || "",
         order: parseInt(order) || 0,
       };
 
@@ -86,12 +89,11 @@ export function CollectionForm({ initialData, isEditing }: CollectionFormProps) 
       </div>
 
       <div>
-        <label className={labelClass}>URL da imagem de capa</label>
-        <input
-          value={coverImage}
-          onChange={(e) => setCoverImage(e.target.value)}
-          className={inputClass}
-          placeholder="/images/collections/colecao.jpg"
+        <label className={labelClass}>Imagem de capa</label>
+        <ImageUpload
+          images={coverImages}
+          onChange={(imgs) => setCoverImages(imgs.slice(0, 1))}
+          folder="collections"
         />
       </div>
 
