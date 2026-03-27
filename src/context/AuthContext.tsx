@@ -8,7 +8,8 @@ import {
   User,
 } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { auth, db } from "@config/firebase";
+import { db } from "@config/firebase";
+import { auth } from "@config/firebase-auth";
 
 export type UserRole = "super" | "admin";
 
