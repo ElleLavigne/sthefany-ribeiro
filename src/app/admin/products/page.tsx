@@ -7,12 +7,14 @@ import { AdminShell } from "@/components/admin/AdminShell";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 import type { Product } from "@/types/product";
+import { ConfirmModal } from "@/components/admin/ConfirmModal";
 
 export default function AdminProductsPage() {
   const { user } = useAuth();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<{ slug: string; name: string } | null>(null);
 
   useEffect(() => {
     fetchProducts();
@@ -25,12 +27,13 @@ export default function AdminProductsPage() {
     setLoading(false);
   }
 
-  async function handleDelete(slug: string, name: string) {
-    if (!confirm(`Tem certeza que deseja excluir "${name}"?`)) return;
-    setDeleting(slug);
-    await deleteDoc(doc(db, "products", slug));
-    setProducts((prev) => prev.filter((p) => p.slug !== slug));
+  async function handleDeleteConfirm() {
+    if (!deleteTarget) return;
+    setDeleting(deleteTarget.slug);
+    await deleteDoc(doc(db, "products", deleteTarget.slug));
+    setProducts((prev) => prev.filter((p) => p.slug !== deleteTarget.slug));
     setDeleting(null);
+    setDeleteTarget(null);
   }
 
   function formatPrice(cents: number) {
@@ -120,7 +123,7 @@ export default function AdminProductsPage() {
                         </Link>
                         {user?.role === "super" && (
                           <button
-                            onClick={() => handleDelete(product.slug, product.name)}
+                            onClick={() => setDeleteTarget({ slug: product.slug, name: product.name })}
                             disabled={deleting === product.slug}
                             className="px-3 py-1 text-sm text-red-700 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
                           >
@@ -136,6 +139,17 @@ export default function AdminProductsPage() {
           </div>
         </div>
       )}
+
+      <ConfirmModal
+        open={!!deleteTarget}
+        title="Excluir produto"
+        message={`O produto "${deleteTarget?.name}" será removido permanentemente e não aparecerá mais no site. Essa ação não pode ser desfeita.`}
+        confirmLabel="Sim, excluir"
+        cancelLabel="Cancelar"
+        loading={!!deleting}
+        onConfirm={handleDeleteConfirm}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </AdminShell>
   );
 }

@@ -7,12 +7,14 @@ import { AdminShell } from "@/components/admin/AdminShell";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 import type { Collection } from "@/types/collection";
+import { ConfirmModal } from "@/components/admin/ConfirmModal";
 
 export default function AdminCollectionsPage() {
   const { user } = useAuth();
   const [collections, setCollections] = useState<Collection[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<{ slug: string; name: string } | null>(null);
 
   useEffect(() => {
     fetchCollections();
@@ -25,12 +27,13 @@ export default function AdminCollectionsPage() {
     setLoading(false);
   }
 
-  async function handleDelete(slug: string, name: string) {
-    if (!confirm(`Tem certeza que deseja excluir a coleção "${name}"?`)) return;
-    setDeleting(slug);
-    await deleteDoc(doc(db, "collections", slug));
-    setCollections((prev) => prev.filter((c) => c.slug !== slug));
+  async function handleDeleteConfirm() {
+    if (!deleteTarget) return;
+    setDeleting(deleteTarget.slug);
+    await deleteDoc(doc(db, "collections", deleteTarget.slug));
+    setCollections((prev) => prev.filter((c) => c.slug !== deleteTarget.slug));
     setDeleting(null);
+    setDeleteTarget(null);
   }
 
   return (
@@ -87,7 +90,7 @@ export default function AdminCollectionsPage() {
                         </Link>
                         {user?.role === "super" && (
                           <button
-                            onClick={() => handleDelete(col.slug, col.name)}
+                            onClick={() => setDeleteTarget({ slug: col.slug, name: col.name })}
                             disabled={deleting === col.slug}
                             className="px-3 py-1 text-sm text-red-700 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
                           >
@@ -103,6 +106,17 @@ export default function AdminCollectionsPage() {
           </div>
         </div>
       )}
+
+      <ConfirmModal
+        open={!!deleteTarget}
+        title="Excluir coleção"
+        message={`A coleção "${deleteTarget?.name}" será removida permanentemente e não aparecerá mais no site. Essa ação não pode ser desfeita.`}
+        confirmLabel="Sim, excluir"
+        cancelLabel="Cancelar"
+        loading={!!deleting}
+        onConfirm={handleDeleteConfirm}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </AdminShell>
   );
 }

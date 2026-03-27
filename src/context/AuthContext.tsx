@@ -35,13 +35,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      if (firebaseUser) {
-        const adminUser = await getAdminData(firebaseUser);
-        setUser(adminUser);
-      } else {
+      try {
+        if (firebaseUser) {
+          const adminUser = await getAdminData(firebaseUser);
+          setUser(adminUser);
+        } else {
+          setUser(null);
+        }
+      } catch (err) {
+        console.error("Erro ao carregar dados do admin:", err);
         setUser(null);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return unsubscribe;
@@ -62,12 +68,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function signIn(email: string, password: string) {
     const credential = await signInWithEmailAndPassword(auth, email, password);
-    const adminUser = await getAdminData(credential.user);
-    if (!adminUser) {
+    try {
+      const adminUser = await getAdminData(credential.user);
+      if (!adminUser) {
+        console.error("Usuário autenticado mas não encontrado em adminUsers. UID:", credential.user.uid);
+        await firebaseSignOut(auth);
+        throw new Error("Acesso não autorizado. Usuário não cadastrado como admin.");
+      }
+      setUser(adminUser);
+    } catch (err) {
+      console.error("Erro ao buscar dados do admin no Firestore:", err);
       await firebaseSignOut(auth);
-      throw new Error("Acesso não autorizado.");
+      throw err;
     }
-    setUser(adminUser);
   }
 
   async function signOut() {
