@@ -9,6 +9,7 @@ interface PromoCardData {
   tag: string;
   href: string;
   image: string;
+  objectPosition?: string;
 }
 
 const cards: PromoCardData[] = [
@@ -16,13 +17,14 @@ const cards: PromoCardData[] = [
     title: "Vestidos",
     tag: "vestido",
     href: "/collections/verao-2025",
-    image: "/images/promo/promo-vestidos.jpg",
+    image: "/images/products/modeloVestido.jpg",
+    objectPosition: "center 20%",
   },
   {
     title: "Conjuntos",
     tag: "conjunto",
     href: "/collections/essenciais",
-    image: "/images/promo/promo-conjuntos.jpg",
+    image: "/images/products/modeloConjunto.jpg",
   },
 ];
 
@@ -47,7 +49,8 @@ export async function PromoCards() {
                   src={card.image}
                   alt={card.title}
                   fill
-                  className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  style={{ objectPosition: card.objectPosition || "top" }}
                   sizes="(max-width: 768px) 100vw, 716px"
                 />
 
