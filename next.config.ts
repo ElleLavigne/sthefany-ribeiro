@@ -1,8 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Next.js respects tsconfig paths automatically — nenhuma configuração adicional necessária.
-  // Aliases @config e @data estão definidos no tsconfig.json
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "firebasestorage.googleapis.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

@@ -43,6 +43,10 @@ export function ProductListWithFilters({ products, defaultColumns = 3 }: Product
   const [activeCategory, setActiveCategory] = useState<Category | null>(null);
   const [activeColor, setActiveColor] = useState<string | null>(null);
   const [activeSize, setActiveSize] = useState<string | null>(null);
+  const [priceSort, setPriceSort] = useState<"none" | "asc" | "desc">("none");
+  const [priceMin, setPriceMin] = useState("");
+  const [priceMax, setPriceMax] = useState("");
+  const [priceMenuOpen, setPriceMenuOpen] = useState(false);
 
   // Tamanhos dependem da categoria ativa
   const sizes = UNIQUE_SIZE_CATEGORIES.includes(activeCategory as Category)
@@ -81,11 +85,25 @@ export function ProductListWithFilters({ products, defaultColumns = 3 }: Product
       if (activeSize) {
         if (!p.sizes.includes(activeSize)) return false;
       }
+      if (priceMin) {
+        if (p.price < parseFloat(priceMin) * 100) return false;
+      }
+      if (priceMax) {
+        if (p.price > parseFloat(priceMax) * 100) return false;
+      }
       return true;
     });
-  }, [products, search, activeCategory, activeColor, activeSize]);
+  }, [products, search, activeCategory, activeColor, activeSize, priceMin, priceMax]);
 
-  const hasFilters = activeCategory || activeColor || activeSize || search;
+  // Ordenar por preço
+  const sorted = useMemo(() => {
+    if (priceSort === "none") return filtered;
+    return [...filtered].sort((a, b) =>
+      priceSort === "asc" ? a.price - b.price : b.price - a.price
+    );
+  }, [filtered, priceSort]);
+
+  const hasFilters = activeCategory || activeColor || activeSize || search || priceSort !== "none" || priceMin || priceMax;
 
   function handleCategoryClick(cat: Category) {
     const next = activeCategory === cat ? null : cat;
@@ -99,28 +117,121 @@ export function ProductListWithFilters({ products, defaultColumns = 3 }: Product
     setActiveCategory(null);
     setActiveColor(null);
     setActiveSize(null);
+    setPriceSort("none");
+    setPriceMin("");
+    setPriceMax("");
+    setPriceMenuOpen(false);
   }
 
   return (
     <div>
-      {/* Barra de pesquisa */}
-      <div className="relative mb-6">
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Buscar produto..."
-          className="w-full px-4 py-2.5 pl-10 border border-brand-warm/40 rounded-lg text-sm text-stone-950 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-brand-olive focus:border-transparent bg-white"
-        />
-        <svg
-          className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={2}
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-        </svg>
+      {/* Barra de pesquisa + filtro de preço */}
+      <div className="flex items-center gap-2 mb-6">
+        <div className="relative flex-1 max-w-xs">
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Buscar..."
+            className="w-full px-3 py-2 pl-9 border border-brand-warm/40 rounded-lg text-sm text-stone-950 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-brand-olive focus:border-transparent bg-white"
+          />
+          <svg
+            className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        </div>
+
+        {/* Filtro de preço */}
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() => setPriceMenuOpen(!priceMenuOpen)}
+            className={cn(
+              "flex items-center gap-1.5 px-3 py-2 border rounded-lg text-sm transition-colors",
+              (priceSort !== "none" || priceMin || priceMax)
+                ? "border-brand-brown bg-brand-brown text-white"
+                : "border-brand-warm/40 text-stone-600 hover:border-stone-400"
+            )}
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+            </svg>
+            <span className="hidden sm:inline">Preço</span>
+          </button>
+
+          {priceMenuOpen && (
+            <div className="absolute right-0 top-full mt-1 bg-white border border-stone-200 rounded-lg shadow-lg z-10 w-56 p-3 space-y-3">
+              {/* Faixa de preço */}
+              <p className="text-[10px] tracking-widest uppercase text-stone-500 font-semibold">Faixa de preço</p>
+              <div className="flex items-center gap-2">
+                <div className="relative flex-1">
+                  <span className="absolute left-2 top-1/2 -translate-y-1/2 text-xs text-stone-400">R$</span>
+                  <input
+                    type="number"
+                    min="0"
+                    placeholder="Min"
+                    value={priceMin}
+                    onChange={(e) => setPriceMin(e.target.value)}
+                    className="w-full pl-7 pr-2 py-1.5 border border-stone-300 rounded text-sm text-stone-950 focus:outline-none focus:ring-1 focus:ring-brand-olive"
+                  />
+                </div>
+                <span className="text-stone-400 text-sm">—</span>
+                <div className="relative flex-1">
+                  <span className="absolute left-2 top-1/2 -translate-y-1/2 text-xs text-stone-400">R$</span>
+                  <input
+                    type="number"
+                    min="0"
+                    placeholder="Max"
+                    value={priceMax}
+                    onChange={(e) => setPriceMax(e.target.value)}
+                    className="w-full pl-7 pr-2 py-1.5 border border-stone-300 rounded text-sm text-stone-950 focus:outline-none focus:ring-1 focus:ring-brand-olive"
+                  />
+                </div>
+              </div>
+
+              {/* Ordenar */}
+              <p className="text-[10px] tracking-widest uppercase text-stone-500 font-semibold pt-1">Ordenar</p>
+              <div className="flex gap-1">
+                <button
+                  type="button"
+                  onClick={() => setPriceSort(priceSort === "asc" ? "none" : "asc")}
+                  className={cn(
+                    "flex-1 py-1.5 text-xs font-medium rounded transition-colors",
+                    priceSort === "asc" ? "bg-brand-brown text-white" : "bg-stone-100 text-stone-600 hover:bg-stone-200"
+                  )}
+                >
+                  Menor
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPriceSort(priceSort === "desc" ? "none" : "desc")}
+                  className={cn(
+                    "flex-1 py-1.5 text-xs font-medium rounded transition-colors",
+                    priceSort === "desc" ? "bg-brand-brown text-white" : "bg-stone-100 text-stone-600 hover:bg-stone-200"
+                  )}
+                >
+                  Maior
+                </button>
+              </div>
+
+              {/* Limpar */}
+              {(priceSort !== "none" || priceMin || priceMax) && (
+                <button
+                  type="button"
+                  onClick={() => { setPriceSort("none"); setPriceMin(""); setPriceMax(""); }}
+                  className="w-full py-1.5 text-xs text-red-700 hover:bg-red-50 rounded border border-red-200 transition-colors"
+                >
+                  Limpar filtro de preço
+                </button>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Barra de filtros */}
@@ -189,11 +300,11 @@ export function ProductListWithFilters({ products, defaultColumns = 3 }: Product
 
       {/* Contador */}
       <p className="text-[10px] tracking-widest uppercase text-stone-400 mb-6">
-        {filtered.length} {filtered.length === 1 ? "peça" : "peças"}
+        {sorted.length} {sorted.length === 1 ? "peça" : "peças"}
         {hasFilters && " encontradas"}
       </p>
 
-      <ProductGrid products={filtered} columns={defaultColumns} />
+      <ProductGrid products={sorted} columns={defaultColumns} />
     </div>
   );
 }
