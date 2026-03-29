@@ -26,12 +26,14 @@ const cards: PromoCardData[] = [
   },
 ];
 
-export function PromoCards() {
+export async function PromoCards() {
+  const prices = await Promise.all(cards.map((card) => getLowestPriceByTag(card.tag)));
+
   return (
     <section aria-label="Promocoes em destaque" className="py-2 px-2 md:px-8 lg:px-16">
       <div className="max-w-362 mx-auto flex flex-col md:flex-row gap-2 justify-center">
         {cards.map((card, index) => {
-          const lowestPrice = getLowestPriceByTag(card.tag);
+          const lowestPrice = prices[index];
 
           return (
             <RevealOnScroll key={card.title} delay={index * 150}>

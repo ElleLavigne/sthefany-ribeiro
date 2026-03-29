@@ -5,18 +5,21 @@ import { ProductGrid } from "@/components/products/ProductGrid/ProductGrid";
 import { getCollectionBySlug, getCollectionSlugs } from "@/lib/data/collections";
 import { getProductsByCollection } from "@/lib/data/products";
 
+export const revalidate = 60;
+export const dynamicParams = true;
+
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  const slugs = getCollectionSlugs();
+  const slugs = await getCollectionSlugs();
   return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const collection = getCollectionBySlug(slug);
+  const collection = await getCollectionBySlug(slug);
   if (!collection) return {};
   return {
     title: collection.name,
@@ -26,11 +29,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CollectionDetailPage({ params }: Props) {
   const { slug } = await params;
-  const collection = getCollectionBySlug(slug);
+  const collection = await getCollectionBySlug(slug);
 
   if (!collection) notFound();
 
-  const products = getProductsByCollection(slug);
+  const products = await getProductsByCollection(slug);
 
   return (
     <div className="py-16 md:py-24">

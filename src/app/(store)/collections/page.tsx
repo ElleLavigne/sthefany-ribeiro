@@ -9,8 +9,10 @@ export const metadata: Metadata = {
   description: `Explore todos os produtos de ${brand.name}.`,
 };
 
-export default function CollectionsPage() {
-  const products = getProducts();
+export const revalidate = 60;
+
+export default async function CollectionsPage() {
+  const products = await getProducts();
 
   return (
     <div className="py-16 md:py-24">

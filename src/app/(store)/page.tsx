@@ -4,8 +4,10 @@ import { ProductListWithFilters } from "@/components/products/ProductListWithFil
 import { Container } from "@/components/layout/Container/Container";
 import { getProducts } from "@/lib/data/products";
 
-export default function HomePage() {
-  const products = getProducts();
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const products = await getProducts();
 
   return (
     <>

@@ -39,6 +39,7 @@ interface ProductListWithFiltersProps {
 }
 
 export function ProductListWithFilters({ products, defaultColumns = 3 }: ProductListWithFiltersProps) {
+  const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState<Category | null>(null);
   const [activeColor, setActiveColor] = useState<string | null>(null);
   const [activeSize, setActiveSize] = useState<string | null>(null);
@@ -64,7 +65,12 @@ export function ProductListWithFilters({ products, defaultColumns = 3 }: Product
 
   // Filtrar produtos
   const filtered = useMemo(() => {
+    const searchLower = search.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     return products.filter((p) => {
+      if (search) {
+        const nameLower = p.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        if (!nameLower.includes(searchLower)) return false;
+      }
       if (activeCategory) {
         const cat = getCategory(p.tags);
         if (cat !== activeCategory) return false;
@@ -77,9 +83,9 @@ export function ProductListWithFilters({ products, defaultColumns = 3 }: Product
       }
       return true;
     });
-  }, [products, activeCategory, activeColor, activeSize]);
+  }, [products, search, activeCategory, activeColor, activeSize]);
 
-  const hasFilters = activeCategory || activeColor || activeSize;
+  const hasFilters = activeCategory || activeColor || activeSize || search;
 
   function handleCategoryClick(cat: Category) {
     const next = activeCategory === cat ? null : cat;
@@ -89,6 +95,7 @@ export function ProductListWithFilters({ products, defaultColumns = 3 }: Product
   }
 
   function clearFilters() {
+    setSearch("");
     setActiveCategory(null);
     setActiveColor(null);
     setActiveSize(null);
@@ -96,6 +103,26 @@ export function ProductListWithFilters({ products, defaultColumns = 3 }: Product
 
   return (
     <div>
+      {/* Barra de pesquisa */}
+      <div className="relative mb-6">
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Buscar produto..."
+          className="w-full px-4 py-2.5 pl-10 border border-brand-warm/40 rounded-lg text-sm text-stone-950 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-brand-olive focus:border-transparent bg-white"
+        />
+        <svg
+          className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={2}
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        </svg>
+      </div>
+
       {/* Barra de filtros */}
       <div className="flex flex-wrap items-center gap-4 mb-8 pb-4 border-b border-brand-warm/30">
         {/* Categoria */}

@@ -9,18 +9,21 @@ import { getCollectionBySlug } from "@/lib/data/collections";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import { brand } from "@config/brand";
 
+export const revalidate = 60;
+export const dynamicParams = true;
+
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  const slugs = getProductSlugs();
+  const slugs = await getProductSlugs();
   return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
   if (!product) return {};
   return {
     title: product.name,
@@ -39,12 +42,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductDetailPage({ params }: Props) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) notFound();
 
-  const collection = getCollectionBySlug(product.collectionSlug);
-  const related = getRelatedProducts(product, 4);
+  const collection = await getCollectionBySlug(product.collectionSlug);
+  const related = await getRelatedProducts(product, 4);
 
   return (
     <div className="py-8 md:py-16">
